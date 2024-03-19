@@ -2,7 +2,7 @@ import users from "../data/users.data.js";
 
 const get = (userId) => {
   const findUser = users.find((user) => {
-    if (users.id === userId) {
+    if (user.id === userId) {
       return user;
     }
     return null;

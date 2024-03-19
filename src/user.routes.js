@@ -10,8 +10,34 @@ const STATUS = {
   failure: "NO",
 };
 
-router.get("/add", (req, res) => {
-  res.status(StatusCodes.OK).send({ body: "hello people" });
+router.get("/all", (req, res) => {
+  const users = userService.getAllUsers();
+  if (users.length) {
+    return res.status(StatusCodes.OK).send({
+      status: STATUS.success,
+      message: users,
+    });
+  }
+  return res.status(StatusCodes.NOT_FOUND).send({
+    status: STATUS.failure,
+    message: `No users  found`,
+  });
+});
+
+router.get("/get/:id", (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  const user = userService.getUser(id);
+
+  if (user) {
+    return res.status(StatusCodes.OK).send({
+      status: STATUS.success,
+      user,
+    });
+  }
+  return res.status(StatusCodes.NOT_FOUND).send({
+    status: STATUS.failure,
+    message: `No user  found`,
+  });
 });
 
 router.post("/add", (req, res) => {
@@ -20,7 +46,7 @@ router.post("/add", (req, res) => {
   const addedUser = userService.addUser(user);
   return res.status(StatusCodes.CREATED).send({
     status: STATUS.success,
-    message: addedUser,
+    user: addedUser,
   });
 });
 
@@ -33,7 +59,7 @@ router.put("/update/:id", (req, res) => {
   if (updatedUser) {
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,
-      message: updatedUser,
+      user: updatedUser,
     });
   } else {
     return res.status(StatusCodes.NOT_FOUND).send({
