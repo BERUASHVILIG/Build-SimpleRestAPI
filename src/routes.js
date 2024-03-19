@@ -24,30 +24,12 @@ router.post("/add", (req, res) => {
   });
 });
 
-// router.put("/update/:id", (req, res) => {
-//   const { body: user } = req;
-
-//   const id = parseInt(req.params.id, 10);
-
-//   const updatedUser = userService.updateUser(id, user);
-//   if (updatedUser) {
-//     return res.status(StatusCodes.OK).send({
-//       status: STATUS.success,
-//       message: updatedUser,
-//     });
-//   } else {
-//     return res.status(StatusCodes.NOT_FOUND).send({
-//       status: STATUS.failure,
-//       message: `User "${id}" is not found`,
-//     });
-//   }
-// });
-
 router.put("/update/:id", (req, res) => {
   const { body: user } = req;
   const id = parseInt(req.params.id, 10);
 
   const updatedUser = userService.updateUser(id, user);
+  console.log(updatedUser);
   if (updatedUser) {
     return res.status(StatusCodes.OK).send({
       status: STATUS.success,

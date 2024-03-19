@@ -1,19 +1,19 @@
-import useDao from "../models/persistence/user.dao.js";
+import userDao from "../models/persistence/user.dao.js";
 
 const getUser = (userId) => {
-  return useDao.get(userId);
+  return userDao.get(userId);
 };
 
 const updateUser = (userId, details) => {
-  return useDao.update(userId, details);
+  return userDao.update(userId, details);
 };
 
 const addUser = (details) => {
-  return useDao.insert(details);
+  return userDao.insert(details);
 };
 
 const removeUser = (userId) => {
-  return useDao.insert(userId);
+  return userDao.insert(userId);
 };
 
 export default {
